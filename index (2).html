@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portal YASSA</title>
+
+<!-- PWA -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#E0E5EC">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Portal YASSA">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#E0E5EC;
+    --text-dark:#3A4152;
+    --text-muted:#7C8699;
+    --shadow-light:#FFFFFF;
+    --shadow-dark:#A3B1C6;
+    --accent-mobile:#5B8DEF;
+    --accent-digital:#4CAF87;
+    --accent-waris:#E0A458;
+    --accent-portal:#8B7FD6;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    font-family:'Inter', sans-serif;
+    background:var(--bg);
+    color:var(--text-dark);
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:48px 20px 32px;
+  }
+
+  .header{
+    text-align:center;
+    margin-bottom:44px;
+    max-width:520px;
+  }
+  .header .eyebrow{
+    font-size:12px;
+    letter-spacing:2.5px;
+    color:var(--text-muted);
+    font-weight:600;
+    text-transform:uppercase;
+    margin-bottom:10px;
+  }
+  .header h1{
+    font-family:'Poppins', sans-serif;
+    font-size:32px;
+    font-weight:700;
+    margin-bottom:10px;
+  }
+  .header p{
+    font-size:14.5px;
+    color:var(--text-muted);
+    line-height:1.5;
+  }
+
+  .switchboard{
+    width:100%;
+    max-width:520px;
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+  }
+
+  .app-card{
+    background:var(--bg);
+    border-radius:20px;
+    padding:20px 22px;
+    display:flex;
+    align-items:center;
+    gap:16px;
+    box-shadow: 8px 8px 16px var(--shadow-dark), -8px -8px 16px var(--shadow-light);
+    text-decoration:none;
+    color:inherit;
+    transition: box-shadow 0.15s ease, transform 0.15s ease;
+    position:relative;
+    overflow:hidden;
+  }
+  .app-card:active{
+    box-shadow: inset 5px 5px 10px var(--shadow-dark), inset -5px -5px 10px var(--shadow-light);
+    transform: scale(0.99);
+  }
+
+  .status-dot{
+    position:absolute;
+    top:16px;
+    right:18px;
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:#4CAF87;
+    box-shadow:0 0 0 3px rgba(76,175,135,0.15);
+  }
+
+  .icon-well{
+    flex-shrink:0;
+    width:56px;
+    height:56px;
+    border-radius:16px;
+    background:var(--bg);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light);
+  }
+  .icon-well svg{ width:26px; height:26px; }
+
+  .card-body{ flex:1; min-width:0; }
+  .card-body .app-name{
+    font-family:'Poppins', sans-serif;
+    font-size:16px;
+    font-weight:600;
+    margin-bottom:3px;
+  }
+  .card-body .app-desc{
+    font-size:12.5px;
+    color:var(--text-muted);
+    line-height:1.4;
+  }
+
+  .go-arrow{
+    flex-shrink:0;
+    width:34px;
+    height:34px;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow: 3px 3px 6px var(--shadow-dark), -3px -3px 6px var(--shadow-light);
+  }
+  .go-arrow svg{ width:16px; height:16px; }
+
+  .mobile .icon-well svg, .mobile .go-arrow svg{ color:var(--accent-mobile); }
+  .digital .icon-well svg, .digital .go-arrow svg{ color:var(--accent-digital); }
+  .waris .icon-well svg, .waris .go-arrow svg{ color:var(--accent-waris); }
+
+  .footer-note{
+    margin-top:40px;
+    max-width:520px;
+    text-align:center;
+    font-size:12px;
+    color:var(--text-muted);
+    line-height:1.6;
+    padding:14px 18px;
+    border-radius:14px;
+    background:var(--bg);
+    box-shadow: inset 3px 3px 6px var(--shadow-dark), inset -3px -3px 6px var(--shadow-light);
+  }
+  .footer-note code{
+    background:rgba(163,177,198,0.2);
+    padding:1px 5px;
+    border-radius:4px;
+    font-size:11px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .app-card{ transition:none; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="eyebrow">Yayasan Salam Satu Aspal</div>
+    <h1>Portal YASSA</h1>
+    <p>Satu pintu masuk untuk semua sistem YASSA. Pilih aplikasi yang ingin dibuka.</p>
+  </div>
+
+  <div class="switchboard">
+
+    <a href="https://GANTI-DENGAN-URL-YASSA-MOBILE/exec" class="app-card mobile" target="_blank" rel="noopener">
+      <span class="status-dot"></span>
+      <span class="icon-well">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2Z"/><path d="M12 18h.01"/></svg>
+      </span>
+      <span class="card-body">
+        <span class="app-name">YASSA Mobile</span>
+        <span class="app-desc">Data keluarga &amp; anak</span>
+      </span>
+      <span class="go-arrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+      </span>
+    </a>
+
+    <a href="https://GANTI-DENGAN-URL-YASSA-DIGITAL/exec" class="app-card digital" target="_blank" rel="noopener">
+      <span class="status-dot"></span>
+      <span class="icon-well">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2v4M16 2v4M3 10h18"/><rect x="3" y="4" width="18" height="18" rx="2"/><path d="m9 16 2 2 4-4"/></svg>
+      </span>
+      <span class="card-body">
+        <span class="app-name">YASSA Digital</span>
+        <span class="app-desc">Absensi &amp; notulen rapat</span>
+      </span>
+      <span class="go-arrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+      </span>
+    </a>
+
+    <a href="https://GANTI-DENGAN-URL-AHLI-WARIS/exec" class="app-card waris" target="_blank" rel="noopener">
+      <span class="status-dot"></span>
+      <span class="icon-well">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/><path d="M9 15h6M9 11h6"/></svg>
+      </span>
+      <span class="card-body">
+        <span class="app-name">Ahli Waris</span>
+        <span class="app-desc">Manajemen data penerima manfaat</span>
+      </span>
+      <span class="go-arrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+      </span>
+    </a>
+
+  </div>
+
+  <div class="footer-note">
+    Ganti setiap <code>href</code> di atas dengan URL deployment <code>/exec</code> aplikasi masing-masing. Untuk menambah aplikasi baru, salin satu blok <code>&lt;a class="app-card"&gt;</code> dan sesuaikan warna aksen, ikon, judul, dan link.
+  </div>
+
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker
+          .register("service-worker.js")
+          .catch((err) => console.warn("Service worker gagal daftar:", err));
+      });
+    }
+  </script>
+
+</body>
+</html>
