@@ -1,4 +1,4 @@
-const CACHE_NAME = "portal-yassa-v1";
+const CACHE_NAME = "portal-yassa-v2";
 const APP_SHELL = [
   "./index.html",
   "./manifest.json",
